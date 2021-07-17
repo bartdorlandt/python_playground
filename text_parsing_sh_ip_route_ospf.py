@@ -9,7 +9,7 @@ from local_lib import *
 # https://pyneng.readthedocs.io/en/latest/book/21_textfsm/textfsm_examples.html
 
 status = os.path.join('TextFSM', 'sh_ip_route_ospf.txt')
-tpl = os.path.join('TextFSM', 'sh_ip_route_ospf.template')
+tpl = os.path.join('TextFSM', 'sh_ip_route_ospf.textfsm')
 
 with open(tpl) as f, open(status) as output:
     re_table = textfsm.TextFSM(f)
