@@ -14,6 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
+include/
 lib/
 lib64/
 parts/
@@ -130,3 +131,4 @@ dmypy.json
 
 # Editor
 .idea/
+.vscode/
