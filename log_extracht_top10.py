@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 import re
 
-FILE="files/apache_logs.txt"
-count_dict = {}
+FILE = "files/apache_logs.txt"
+count_dict: dict[str, int] = {}
 
-with open(FILE, 'r') as f:
+with open(FILE, "r") as f:
     content = f.readlines()
 
-slash16 = re.compile('\d+\.\d+')
+slash16 = re.compile("\d+\.\d+")
 ips = [x.split()[0] for x in content]
 subnets = [slash16.match(x).group(0) for x in ips]
 
@@ -20,4 +20,4 @@ for subnet in subnets:
 top10_sorted = sorted(count_dict.items(), key=lambda item: item[1], reverse=True)[:10]
 
 for subnet, count in top10_sorted:
-    print(f'{count} - {subnet}')
+    print(f"{count} - {subnet}")
