@@ -36,8 +36,17 @@ function install:dev {
   install "--with dev"
 }
 
-function install:twine {
-   _echo_run "python3 -m pip install --upgrade twine"
+function build {
+   _echo_run "poetry build"
+}
+
+function publish {
+  # https://python-poetry.org/docs/master/repositories/#configuring-credentials
+   _echo_run poetry publish "${@}"
+}
+
+function publish:build {
+  publish "--build"
 }
 
 function test {
