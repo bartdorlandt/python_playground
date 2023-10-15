@@ -7,7 +7,7 @@ count_dict: dict[str, int] = {}
 with open(FILE, "r") as f:
     content = f.readlines()
 
-slash16 = re.compile("\d+\.\d+")
+slash16 = re.compile(r"\d+\.\d+")
 ips = [x.split()[0] for x in content]
 subnets = [slash16.match(x).group(0) for x in ips]
 

@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+
+# minus sign: use default if unset
+NAME="${NAME:-package_test}"
+VERSION="${VERSION:-latest}"
+
+# If we're running in CI we need to disable docker_compose_tty allocation for docker compose
+# commands that enable it by default, such as exec and run.
+#docker_compose_tty=""
+#docker_run_tty="-it"
+#if [[ ! -t 1 ]]; then
+#  docker_compose_tty="-T"
+#  docker_run_tty=""
+#fi
+
+# -----------------------------------------------------------------------------
+# Helper functions start with _ and aren't listed in this script's help menu.
+# -----------------------------------------------------------------------------
+function _echo_run {
+  echo "$@"
+  # shellcheck disable=SC2091
+  # shellcheck disable=SC2116
+  $(echo "$@")
+}
+
+function _dc {
+  docker compose "${DC}" ${TTY} "${@}"
+}
+
+function _build_run_down {
+  docker compose build
+  docker compose run ${TTY} "${@}"
+  docker compose down
+}
+
+# -----------------------------------------------------------------------------
+function install {
+   _echo_run poetry install "${@}"
+}
+
+function install:dev {
+  install "--with dev"
+}
+
+function test {
+	_echo_run "ruff ."
+	_echo_run "mypy . --junit-xml mypy_report.xml"
+	_echo_run "black --diff --color ."
+	_echo_run "pytest"
+}
+
+function fix {
+	_echo_run "black ."
+	_echo_run "ruff . --fix"
+}
+
+function test:coverage {
+  # Get test coverage
+  _echo_run pytest --cov test/ --cov-report term-missing "${@}"
+}
+
+function help {
+  printf "%s <task> [args]\n\nTasks:\n" "${0}"
+
+  compgen -A function | grep -v "^_" | cat -n
+
+  printf "\nExtended help:\n  Each task has comments for general usage\n"
+}
+
+# This idea is heavily inspired by: https://github.com/adriancooney/Taskfile
+TIMEFORMAT=$'\nTask completed in %3lR'
+time "${@:-help}"

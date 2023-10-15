@@ -1,5 +1,0 @@
-textfsm
-tabulate
-pywhatkit
-grpcio
-grpcio-tools
