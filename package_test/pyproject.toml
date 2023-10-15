@@ -1,0 +1,49 @@
+[tool.poetry]
+name = "package-test"
+version = "0.1.0"
+description = "Test build package"
+authors = ["Bart Dorlandt <bart@bamweb.nl>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://python-poetry.org/"
+#repository = "https://github.com/python-poetry/poetry"
+#documentation = "https://python-poetry.org/docs/"
+#keywords = ["packaging", "poetry"]
+packages = [{include = "package_test"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+mypy = "^1.6.0"
+ruff = "^0.0.292"
+black = "^23.9.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-ignore = ["F401", "F403", "PLR2004", "D203", "D213", "D407", "D406"]
+extend-select = ["I", "C90", "D", "PL", "S"]
+extend-exclude = [".git","__pycache__","dist","build",".venv", "test_*"]
+
+[tool.ruff.mccabe]
+max-complexity = 10
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
