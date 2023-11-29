@@ -8,3 +8,7 @@ def get_hour_min_sec(seconds: int) -> tuple[int, int,int]:
     minutes, sec = divmod(seconds, 60)
     hours, minutes = divmod(minutes, 60)
     return hours, minutes, sec
+
+
+assert get_hour_min_sec(460002) == (127, 46, 42)
+assert get_hour_min_sec(3600) == (1, 0, 0)
