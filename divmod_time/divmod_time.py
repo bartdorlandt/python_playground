@@ -10,5 +10,13 @@ def get_hour_min_sec(seconds: int) -> tuple[int, int,int]:
     return hours, minutes, sec
 
 
+def get_days_hour_min_sec(seconds: int) -> tuple[int, int, int,int]:
+    """get_days_hour_min_sec."""
+    hours, minutes, sec = get_hour_min_sec(seconds)
+    days, hours = divmod(hours, 24)
+    return days, hours, minutes, seconds
+
+
 assert get_hour_min_sec(460002) == (127, 46, 42)
 assert get_hour_min_sec(3600) == (1, 0, 0)
+assert get_days_hour_min_sec(460002) == (5, 7, 46, 460002)
