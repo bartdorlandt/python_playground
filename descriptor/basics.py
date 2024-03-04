@@ -6,9 +6,11 @@ class NameDescriptor:
 
 class Person:
     name = NameDescriptor()
+
     def __init__(self, first, last):
         self.first = first
         self.last = last
+
 
 john = Person("John", "Doe")
 print(john.name)

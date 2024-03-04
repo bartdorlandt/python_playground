@@ -46,15 +46,14 @@ function install:dev {
 }
 
 function test {
-	_echo_run "ruff ."
+	_echo_run "ruff check ."
 	_echo_run "mypy . --junit-xml mypy_report.xml"
-	_echo_run "black --diff --color ."
-	_echo_run "pytest"
+	_echo_run "pytest -v"
 }
 
 function fix {
-	_echo_run "black ."
-	_echo_run "ruff . --fix"
+	_echo_run "ruff format ."
+	_echo_run "ruff check . --fix"
 }
 
 function test:coverage {

@@ -7,7 +7,8 @@ def read_from_file(filename: str):
 
 
 def save_file(data: object, filename: str) -> None:
-    """Save data to a file
+    """Save data to a file.
+
     filename is expected to be a string.
     the file is stored in the root of this project/output.
 
@@ -18,6 +19,6 @@ def save_file(data: object, filename: str) -> None:
     output_file = os.path.abspath(filename)
 
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
-    with open(output_file, 'w') as f:
+    with open(output_file, "w") as f:
         f.write(str(data))
     # print(f"Successfully written to: '{output_file}'")

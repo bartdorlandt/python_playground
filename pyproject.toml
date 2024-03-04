@@ -5,6 +5,7 @@ description = "My python playground"
 authors = ["Bart Dorlandt <bart@bamweb.nl>"]
 license = "MIT"
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -18,10 +19,11 @@ grpcio-tools = "^1.59.0"
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-mypy = "^1.6.0"
-ruff = "^0.0.292"
-black = "^23.9.1"
-pytest = "^7.4.2"
+mypy = "*"
+ruff = "*"
+pytest = "*"
+types-tabulate = "*"
+types-protobuf = "^4.24.0.20240302"
 
 [build-system]
 requires = ["poetry-core"]
@@ -30,20 +32,24 @@ build-backend = "poetry.core.masonry.api"
 [tool.ruff]
 line-length = 100
 target-version = "py311"
-extend-ignore = ["F401", "F403", "PLR2004", "D203", "D213", "D407", "D406"]
-extend-select = ["I", "C90", "D", "PL", "S"]
 extend-exclude = [".git","__pycache__","dist","build",".venv", "test_*"]
 
-[tool.ruff.mccabe]
+[tool.ruff.lint]
+extend-ignore = ["F401", "F403", "PLR2004", "D203", "D213", "D407", "D406",
+"D100", "D101", "D102", "D103", "D105", "D107",  # Docstrings
+"S101", # Use of assert
+]
+extend-select = ["I", "C90", "D", "PL", "S"]
+
+[tool.ruff.lint.mccabe]
 max-complexity = 10
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.mypy]
 python_version = "3.11"
 ignore_missing_imports = true
-
-[tool.black]
-line-length = 100
-target-version = ['py311']
+exclude = [
+    "grpc_play/protos/*",  # Exclude all files and directories under grpc_play
+]

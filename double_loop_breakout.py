@@ -29,7 +29,7 @@ for row in board:
 
 
 def cells(board):
-    """Iterate over the cells in a 2D list"""
+    """Iterate over the cells in a 2D list."""
     for row in board:
         yield from row
 

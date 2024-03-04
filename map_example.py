@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import re
 
 sdwan_templates = [
     {
@@ -24,11 +25,5 @@ used_templates = set(map(lambda template: template["templateId"], sdwan_template
 
 list_tpls = [d for d in sdwan_templates if d["templateId"] in vedge_template_ids]
 
-import re
-
-with_re = [
-    d
-    for d in sdwan_templates
-    if re.match(r"^random_template_id_[1,2]", d["templateId"])
-]
+with_re = [d for d in sdwan_templates if re.match(r"^random_template_id_[1,2]", d["templateId"])]
 # [{'deviceType': 'dev_type', 'configType': 'template', 'templateId': 'random_template_id_1'}, {'deviceType': 'dev_type', 'configType': 'template', 'templateId': 'random_template_id_2'}]

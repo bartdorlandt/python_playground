@@ -4,9 +4,7 @@
 import logging
 
 import grpc
-
-import play_pb2
-import play_pb2_grpc
+from protos import play_pb2, play_pb2_grpc
 
 
 def run():

@@ -3,9 +3,7 @@ import logging
 from concurrent import futures
 
 import grpc
-
-import play_pb2
-import play_pb2_grpc
+from protos import play_pb2, play_pb2_grpc
 
 
 class GreetService(play_pb2_grpc.GreetService):
