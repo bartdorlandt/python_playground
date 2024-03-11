@@ -6,9 +6,16 @@
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],
+      "addLabels": ["dev-dependencies"],
       "automerge": true,
-      "ignoreTests": true,
-      "automergeType": "branch"
+      "automergeType": "branch",
+      "groupName": "dev dependency updates"
+    },
+    {
+      "packageNames": ["mypy"],
+      "automerge": true,
+      "automergeType": "branch",
+      "groupName": "mypy updates"
     }
   ]
 }
