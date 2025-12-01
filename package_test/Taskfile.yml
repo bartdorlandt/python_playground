@@ -1,0 +1,14 @@
+# https://taskfile.dev
+
+version: "3"
+
+includes:
+  main:
+    taskfile: ../Taskfile.yml
+    flatten: true
+
+tasks:
+  build:
+    desc: Build the package_test project
+    cmds:
+      - uv build

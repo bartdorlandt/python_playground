@@ -34,13 +34,14 @@ def excepthook(args):
 def get_issues_fields(project, issue, connection):
     pass
 
+
 def work_assigner(jobs_queue: Queue) -> None:
-    """The `work_assigner` function is a worker thread that takes tasks from a queue and processes them by
-    calling the `get_issues_fields` function.
+    """The `work_assigner` function is a worker thread that takes tasks from a queue and processes them by calling the `get_issues_fields` function.
 
     Args:
         jobs_queue (Queue): The jobs_queue parameter is a queue object that contains the tasks to be
-    processed. Each task is a tuple containing the project, issue, and connection information
+    processed. Each task is a tuple containing the project, issue, and connection information.
+
     """
     while not jobs_queue.empty():
         project, issue, connection = jobs_queue.get()
@@ -92,4 +93,3 @@ def main():
     # Wait for all threads to complete
     for w in workers:
         w.join()
-

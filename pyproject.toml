@@ -1,43 +1,49 @@
-[tool.poetry]
+[project]
 name = "python-playground"
 version = "0.1.0"
 description = "My python playground"
-authors = ["Bart Dorlandt <bart@bamweb.nl>"]
-license = "MIT"
+authors = [{ name = "Bart Dorlandt", email = "bart@bamweb.nl" }]
+license = { text = "MIT" }
 readme = "README.md"
-package-mode = false
+requires-python = ">=3.13"
+dependencies = [
+    "textfsm>=2.0.0",
+    "tabulate>=0.9.0",
+    "pywhatkit>=5.4",
+    "grpcio>=1.59.0",
+    "grpcio-tools>=1.59.0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-textfsm = "^2.0.0"
-tabulate = "^0.9.0"
-pywhatkit = "^5.4"
-grpcio = "^1.59.0"
-grpcio-tools = "^1.59.0"
-
-[tool.poetry.group.dev]
-optional = true
-
-[tool.poetry.group.dev.dependencies]
-mypy = "*"
-ruff = "*"
-pytest = "*"
-types-tabulate = "*"
-types-protobuf = "^4.24.0.20240302"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "mypy",
+    "ruff",
+    "pytest",
+    "types-tabulate",
+    "types-protobuf>=4.24.0.20240302",
+]
 
 [tool.ruff]
 line-length = 120
-target-version = "py311"
-extend-exclude = [".git","__pycache__","dist","build",".venv", "test_*"]
+target-version = "py313"
+extend-exclude = [".git", "__pycache__", "dist", "build", ".venv", "test_*"]
 
 [tool.ruff.lint]
-extend-ignore = ["F401", "F403", "PLR2004", "D203", "D213", "D407", "D406",
-"D100", "D101", "D102", "D103", "D105", "D107",  # Docstrings
-"S101", # Use of assert
+extend-ignore = [
+    "F401",
+    "F403",
+    "PLR2004",
+    "D203",
+    "D213",
+    "D407",
+    "D406",
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D105",
+    "D107",    # Docstrings
+    "S101",    # Use of assert
 ]
 extend-select = ["I", "C90", "D", "PL", "S"]
 
@@ -47,9 +53,13 @@ max-complexity = 10
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
+
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.13"
 ignore_missing_imports = true
 exclude = [
-    "grpc_play/protos/*",  # Exclude all files and directories under grpc_play
+    "grpc_play/protos/*", # Exclude all files and directories under grpc_play
 ]
+
+[tool.uv.workspace]
+members = ["package_test"]

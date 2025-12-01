@@ -1,0 +1,35 @@
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  default:
+    cmd: task -l
+    silent: true
+
+  init:
+    desc: Initialize the project
+    dir: "{{.USER_WORKING_DIR}}"
+    cmds:
+      - uv sync --all-packages
+
+  test:
+    desc: Run tests
+    dir: "{{.USER_WORKING_DIR}}"
+    cmds:
+      - uv run ruff check .
+      - uv run mypy . --junit-xml mypy_report.xml
+      - uv run pytest -v
+
+  test:coverage:
+    desc: Run tests with coverage
+    dir: "{{.USER_WORKING_DIR}}"
+    cmds:
+      - uv run pytest --cov test/ --cov-report term-missing {{.CLI_ARGS}}
+
+  fix:
+    desc: Fix code style issues
+    dir: "{{.USER_WORKING_DIR}}"
+    cmds:
+      - uv run ruff format .
+      - uv run ruff check . --fix
