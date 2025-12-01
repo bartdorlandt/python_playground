@@ -1,35 +1,20 @@
-[tool.poetry]
+[project]
 name = "package-test"
 version = "0.1.0"
 description = "Test build package"
-authors = ["Bart Dorlandt <bart@bamweb.nl>"]
-license = "MIT"
+authors = [{ name = "Bart Dorlandt", email = "bart@bamweb.nl" }]
+license = { file = "LICENSE" }
 readme = "README.md"
-homepage = "https://python-poetry.org/"
-#repository = "https://github.com/python-poetry/poetry"
-#documentation = "https://python-poetry.org/docs/"
-#keywords = ["packaging", "poetry"]
-packages = [{include = "package_test"}]
+requires-python = ">=3.11"
+dependencies = []
 
-[tool.poetry.dependencies]
-python = "^3.11"
-
-[tool.poetry.group.dev]
-optional = true
-
-[tool.poetry.group.dev.dependencies]
-pytest = "*"
-mypy = "*"
-ruff = "*"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = ["pytest", "mypy", "ruff"]
 
 [tool.ruff]
 line-length = 100
 target-version = "py311"
-extend-exclude = [".git","__pycache__","dist","build",".venv", "test_*"]
+extend-exclude = [".git", "__pycache__", "dist", "build", ".venv", "test_*"]
 
 [tool.ruff.lint]
 extend-ignore = ["F401", "F403", "PLR2004", "D203", "D213", "D407", "D406"]
@@ -41,7 +26,7 @@ max-complexity = 10
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
+
 [tool.mypy]
 python_version = "3.11"
 ignore_missing_imports = true
-
